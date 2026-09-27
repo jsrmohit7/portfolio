@@ -1,37 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, CheckCircle2 } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { profileData } from '../data/profile.js';
 
 export const Hero = () => {
-  const pipelineStages = [
+  const workflows = [
     {
-      step: "01",
-      tag: "INPUT",
-      label: "Multimodal Signals",
-      payload: "Raw User Intent + Daily Check-ins + 826 Spectral Bands",
-      detail: "Capturing high-dimensional discrete inputs and conversational user queries"
+      id: "01",
+      name: "MINDCARE AI X",
+      link: "https://mindcare-frontend-4ays.onrender.com/",
+      purpose: "LLM / Personalized AI Application",
+      flow: "INPUT → CONTEXT → GRANITE → RESPONSE",
+      stages: [
+        { tag: "INPUT", label: "User Input", payload: "Conversation and journal entries" },
+        { tag: "SIGNALS", label: "Daily Activity", payload: "Daily check-ins + activities + behavioral preferences" },
+        { tag: "CONTEXT", label: "User Context", payload: "Prior check-ins and history injected into prompt context" },
+        { tag: "MODEL", label: "IBM watsonx Granite", payload: "Foundation LLM" },
+        { tag: "OUTPUT", label: "Personalized Response", payload: "Context-aware AI reply" }
+      ],
+      footerLabel: "OUTPUTS",
+      footer: ["AI coaching", "Personalized insights", "Journaling assistance", "Conversational wellness support"]
     },
     {
-      step: "02",
-      tag: "CONTEXT",
-      label: "Cognitive State",
-      payload: "Behavioral Profiles + Historical Journals + Calibrated 139 Bands",
-      detail: "Synthesizing prior check-ins, user preferences, and noise-filtered spectral features"
-    },
-    {
-      step: "03",
-      tag: "MODEL",
-      label: "Foundation / DL",
-      payload: "IBM watsonx Granite LLM + U-Net / FPN ResNet34 Backbones",
-      detail: "Executing deterministic prompt synthesis and semantic tissue segmentation"
-    },
-    {
-      step: "04",
-      tag: "OUTPUT",
-      label: "Actionable Synthesis",
-      payload: "Personalized Wellness Coaching + Multi-Class Tissue Segmentation Maps",
-      detail: "Delivering empathetic structured reflections and patient-level reconstructions"
+      id: "02",
+      name: "HYPERSPECTRAL RESEARCH",
+      purpose: "Deep Learning / Medical Hyperspectral Image Analysis",
+      flow: "IMAGE → 826 → 139 → MODEL → SEGMENTATION → RECONSTRUCTION",
+      stages: [
+        { tag: "INPUT", label: "Hyperspectral Image", payload: "826 spectral bands" },
+        { tag: "PREPROCESS", label: "Spectral Reduction", payload: "Preprocessing → 139 bands / patch features" },
+        { tag: "MODEL", label: "U-Net / LinkNet / FPN", payload: "ResNet34 / ResNet50 backbones" },
+        { tag: "SEGMENTATION", label: "Tissue / Tumor Maps", payload: "Multiclass tissue / tumor segmentation" },
+        { tag: "OUTPUT", label: "Reconstruction", payload: "Patient-level reconstruction" }
+      ],
+      footerLabel: "ALSO",
+      footer: ["Automated web-based inference", "Emerging model architecture experimentation"]
     }
   ];
 
@@ -185,7 +188,7 @@ export const Hero = () => {
           </a>
         </motion.div>
 
-        {/* Static Clean System Architecture Flow Card (No interactive simulation) */}
+        {/* Two independent project workflows — intentionally not connected to each other */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -231,7 +234,7 @@ export const Hero = () => {
                     fontWeight: 700
                   }}
                 >
-                  SYSTEM ARCHITECTURE FLOW
+                  TWO AI SYSTEMS. TWO DIFFERENT PROBLEMS.
                 </span>
               </div>
 
@@ -242,89 +245,198 @@ export const Hero = () => {
                   color: '#8A8A8A'
                 }}
               >
-                INPUT → CONTEXT → MODEL → OUTPUT
+                INDEPENDENT PROJECT WORKFLOWS
               </span>
             </div>
 
-            {/* The 4 Connected Nodes Grid (Clean & Static) */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
-                gap: '0.85rem'
-              }}
-            >
-              {pipelineStages.map((stage) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {workflows.map((wf) => (
                 <div
-                  key={stage.step}
+                  key={wf.id}
                   style={{
                     padding: '1rem',
-                    borderRadius: '0.65rem',
-                    backgroundColor: '#F9F9F9',
-                    border: '1px solid #E5E5E5',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
+                    borderRadius: '0.75rem',
+                    border: '1px solid #DCDCDC',
+                    backgroundColor: '#FFFFFF'
                   }}
                 >
-                  <div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginBottom: '0.35rem'
-                      }}
-                    >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '0.35rem 1rem',
+                      marginBottom: '0.85rem'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.25rem 0.65rem' }}>
                       <span
                         style={{
                           fontFamily: 'var(--font-mono)',
-                          fontSize: '0.7rem',
+                          fontSize: '0.74rem',
                           fontWeight: 800,
-                          color: '#000000'
+                          color: '#000000',
+                          letterSpacing: '0.06em'
                         }}
                       >
-                        {stage.step} · {stage.tag}
+                        {wf.id} · {wf.name}
                       </span>
-                      <CheckCircle2 size={13} color="#000000" />
+                      {wf.link && (
+                        <a
+                          href={wf.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open ${wf.name} live site`}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.2rem',
+                            alignSelf: 'center',
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.62rem',
+                            fontWeight: 700,
+                            letterSpacing: '0.06em',
+                            color: '#000000',
+                            textDecoration: 'none',
+                            padding: '0.15rem 0.5rem',
+                            borderRadius: '999px',
+                            border: '1px solid #000000'
+                          }}
+                        >
+                          LIVE
+                          <ArrowUpRight size={11} />
+                        </a>
+                      )}
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-main)',
+                          fontSize: '0.78rem',
+                          color: '#666666'
+                        }}
+                      >
+                        {wf.purpose}
+                      </span>
                     </div>
-
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-main)',
-                        fontWeight: 700,
-                        fontSize: '0.88rem',
-                        color: '#000000',
-                        marginBottom: '0.35rem'
-                      }}
-                    >
-                      {stage.label}
-                    </div>
-
-                    <div
+                    <span
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '0.68rem',
-                        color: '#666666',
-                        lineHeight: 1.4,
-                        marginBottom: '0.5rem'
+                        fontSize: '0.64rem',
+                        color: '#8A8A8A',
+                        overflowWrap: 'anywhere'
                       }}
                     >
-                      {stage.payload}
-                    </div>
+                      {wf.flow}
+                    </span>
                   </div>
 
                   <div
                     style={{
-                      paddingTop: '0.5rem',
-                      borderTop: '1px dashed #DCDCDC',
-                      fontFamily: 'var(--font-main)',
-                      fontSize: '0.74rem',
-                      color: '#4A4A4A',
-                      lineHeight: 1.35
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.65rem'
                     }}
                   >
-                    {stage.detail}
+                    {wf.stages.map((stage, i) => (
+                      <div
+                        key={stage.tag}
+                        style={{
+                          flex: '1 1 150px',
+                          padding: '0.85rem',
+                          borderRadius: '0.65rem',
+                          backgroundColor: '#F9F9F9',
+                          border: '1px solid #E5E5E5',
+                          minWidth: 0
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '0.35rem',
+                            marginBottom: '0.35rem'
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.64rem',
+                              fontWeight: 800,
+                              color: '#000000',
+                              overflowWrap: 'anywhere'
+                            }}
+                          >
+                            {String(i + 1).padStart(2, '0')} · {stage.tag}
+                          </span>
+                          <CheckCircle2 size={12} color="#000000" style={{ flexShrink: 0 }} />
+                        </div>
+
+                        <div
+                          style={{
+                            fontFamily: 'var(--font-main)',
+                            fontWeight: 700,
+                            fontSize: '0.84rem',
+                            color: '#000000',
+                            marginBottom: '0.3rem',
+                            lineHeight: 1.25
+                          }}
+                        >
+                          {stage.label}
+                        </div>
+
+                        <div
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.66rem',
+                            color: '#666666',
+                            lineHeight: 1.4
+                          }}
+                        >
+                          {stage.payload}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div
+                    style={{
+                      marginTop: '0.85rem',
+                      paddingTop: '0.65rem',
+                      borderTop: '1px dashed #DCDCDC',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      alignItems: 'center',
+                      gap: '0.4rem 0.5rem'
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.64rem',
+                        fontWeight: 700,
+                        color: '#8A8A8A',
+                        letterSpacing: '0.06em'
+                      }}
+                    >
+                      {wf.footerLabel}
+                    </span>
+                    {wf.footer.map((item) => (
+                      <span
+                        key={item}
+                        style={{
+                          fontFamily: 'var(--font-main)',
+                          fontSize: '0.74rem',
+                          color: '#4A4A4A',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: '999px',
+                          border: '1px solid #E5E5E5',
+                          backgroundColor: '#F9F9F9'
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               ))}
